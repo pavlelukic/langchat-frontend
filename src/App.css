@@ -16,8 +16,7 @@
 /*App Layout*/
 .app-container {
   display: flex;
-  width: 95%;
-  max-width: 1200px;
+  width: 65vw;
   height: 90vh;
   border-radius: 20px;
   overflow: hidden;
@@ -36,6 +35,7 @@
   flex-direction: column;
   gap: 20px;
   border-right: 1px solid var(--glass-border);
+  flex-shrink: 0;
 }
 
 .sidebar h2 {
