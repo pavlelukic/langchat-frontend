@@ -61,7 +61,7 @@ function SettingsPanel({
       <div className="setting">
         <label htmlFor="persona">Persona Preset</label>
         <select id="persona" onChange={handlePersonaChange}>
-          <option value="">Select a persona...</option>
+          <option value="">Custom Persona</option>
           {personas.map((persona) => (
             <option key={persona.name} value={persona.name}>
               {persona.name}
