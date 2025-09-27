@@ -17,7 +17,7 @@ function MessageInput({ onSendMessage, isLoading }) {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="Get help from a Senior dev..."
+        placeholder="Get help from your AI assistant..."
         disabled={isLoading}
       />
       <button type="submit" disabled={isLoading}>
