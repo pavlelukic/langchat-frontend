@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import SettingsPanel from "./components/SettingsPanel";
+import ChatWindow from "./components/ChatWindow";
+import MessageInput from "./components/MessageInput";
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const [currentModel, setCurrentModel] = useState("gpt-4o");
   const [systemPrompt, setSystemPrompt] = useState(
     "You are a Senior developer, skilled in advanced programming techniques, proficient across multiple languages, and you have a deep understanding of software architecture."
@@ -28,7 +30,8 @@ function App() {
       });
 
       //3. Dodajemo AI odgovor u chat prozor
-      const aiReply = response.data.reply.match(/text='(.*?)'/)[1];
+      const aiReply =
+        response.data.reply.match(/text='(.*?)'/)[1] || "No content found.";
       setMessages([...newMessages, { sender: "ai", text: aiReply }]);
     } catch (error) {
       console.error("Error fetching response: ", error);
@@ -42,8 +45,17 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>LangChat</h1>
+    <div className="app-container">
+      <SettingsPanel
+        currentModel={currentModel}
+        setCurrentModel={setCurrentModel}
+        systemPrompt={systemPrompt}
+        setSystemPrompt={setSystemPrompt}
+      />
+      <div className="chat-container">
+        <ChatWindow messages={messages} isLoading={isLoading} />
+        <MessageInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+      </div>
     </div>
   );
 }
