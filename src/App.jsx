@@ -1,17 +1,15 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
-import SettingsPanel from "./components/SettingsPanel";
+import SettingsPanel from "./components/SettingsPanel.jsx";
 import ChatWindow from "./components/ChatWindow";
 import MessageInput from "./components/MessageInput";
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [currentModel, setCurrentModel] = useState("gpt-4o");
-  const [systemPrompt, setSystemPrompt] = useState(
-    "You are a Senior developer, skilled in advanced programming techniques, proficient across multiple languages, and you have a deep understanding of software architecture."
-  );
+  const [currentModel, setCurrentModel] = useState("gpt-5");
+  const [systemPrompt, setSystemPrompt] = useState();
 
   const handleSendMessage = async (userMessage) => {
     if (!userMessage) return; //ne saljemo prazne poruke
@@ -30,8 +28,7 @@ function App() {
       });
 
       //3. Dodajemo AI odgovor u chat prozor
-      const aiReply =
-        response.data.reply.match(/text='(.*?)'/)[1] || "No content found.";
+      const aiReply = response.data.reply;
       setMessages([...newMessages, { sender: "ai", text: aiReply }]);
     } catch (error) {
       console.error("Error fetching response: ", error);
