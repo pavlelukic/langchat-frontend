@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [currentModel, setCurrentModel] = useState("gpt-4o");
+  const [systemPrompt, setSystemPrompt] = useState(
+    "You are a Senior developer, skilled in advanced programming techniques, proficient across multiple languages, and you have a deep understanding of software architecture."
+  );
+
+  const handleSendMessage = async (userMessage) => {
+    if (!userMessage) return; //ne saljemo prazne poruke
+
+    //1. Dodajemo odmah poruku korisnika u chat prozor
+    const newMessages = [...messages, { sender: "user", text: userMessage }];
+    setMessages(newMessages);
+    setIsLoading(true);
+
+    try {
+      //2. Saljemo zahtev nasem Spring Boot backendu
+      const response = await axios.post("http://localhost:8080/api/chat", {
+        message: userMessage,
+        model: currentModel,
+        systemPrompt: systemPrompt,
+      });
+
+      //3. Dodajemo AI odgovor u chat prozor
+      const aiReply = response.data.reply.match(/text='(.*?)'/)[1];
+      setMessages([...newMessages, { sender: "ai", text: aiReply }]);
+    } catch (error) {
+      console.error("Error fetching response: ", error);
+      setMessages([
+        ...newMessages,
+        { sender: "ai", text: "Sorry, something went wrong." },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>LangChat</h1>
+    </div>
+  );
 }
 
-export default App
+export default App;
