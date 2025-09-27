@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /*General Style*/
 :root {
   --primary-accent: #7b68ee;
@@ -63,6 +67,10 @@
   font-family: "Inter", sans-serif;
   transition: border-color 0.3s ease;
   font-size: 0.9rem;
+}
+
+.setting textarea {
+  resize: none;
 }
 
 .setting select:focus,
