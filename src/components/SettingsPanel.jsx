@@ -44,7 +44,7 @@ function SettingsPanel({
 
   return (
     <div className="sidebar">
-      <h2>Settings</h2>
+      <h2>Lang Chat</h2>
       <div className="setting">
         <label htmlFor="model">AI Model</label>
         <select

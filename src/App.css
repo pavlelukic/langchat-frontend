@@ -9,8 +9,9 @@
   --text-secondary: #b0b0c0;
   --glass-bg: rgba(40, 40, 60, 0.4);
   --glass-border: rgba(255, 255, 255, 0.1);
-  --user-bubble-bg: rgba(80, 80, 95, 0.5);
+  --user-bubble-bg: rgba(123, 104, 238, 0.2);
   --ai-bubble-bg: rgba(123, 104, 238, 0.7);
+  --input-bg: rgba(30, 30, 45, 0.6);
 }
 
 /*App Layout*/
@@ -61,8 +62,8 @@
   width: 100%;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid transparent;
-  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  background-color: var(--input-bg);
   color: var(--text-light);
   font-family: "Inter", sans-serif;
   transition: border-color 0.3s ease;
