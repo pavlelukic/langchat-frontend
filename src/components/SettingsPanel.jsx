@@ -42,6 +42,8 @@ function SettingsPanel({
     const personaObj = personas.find((p) => p.name === selectedPersonaName);
     if (personaObj) {
       setSystemPrompt(personaObj.prompt);
+    } else {
+      setSystemPrompt("");
     }
   };
 
