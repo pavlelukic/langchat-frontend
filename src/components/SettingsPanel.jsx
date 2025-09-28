@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function SettingsPanel({
   currentModel,
   setCurrentModel,
@@ -32,13 +34,21 @@ function SettingsPanel({
     },
   ];
 
+  const [selectedPersona, setSelectedPersona] = useState("");
+
   const handlePersonaChange = (e) => {
     const selectedPersonaName = e.target.value;
-    const selectedPersona = personas.find(
-      (p) => p.name === selectedPersonaName
-    );
-    if (selectedPersona) {
-      setSystemPrompt(selectedPersona.prompt);
+    setSelectedPersona(selectedPersonaName);
+    const personaObj = personas.find((p) => p.name === selectedPersonaName);
+    if (personaObj) {
+      setSystemPrompt(personaObj.prompt);
+    }
+  };
+
+  const handlePromptChange = (e) => {
+    setSystemPrompt(e.target.value);
+    if (selectedPersona !== "") {
+      setSelectedPersona("");
     }
   };
 
@@ -60,7 +70,11 @@ function SettingsPanel({
       </div>
       <div className="setting">
         <label htmlFor="persona">Persona Preset</label>
-        <select id="persona" onChange={handlePersonaChange}>
+        <select
+          id="persona"
+          value={selectedPersona}
+          onChange={handlePersonaChange}
+        >
           <option value="">Custom Persona</option>
           {personas.map((persona) => (
             <option key={persona.name} value={persona.name}>
@@ -75,7 +89,7 @@ function SettingsPanel({
           id="prompt"
           rows="10"
           value={systemPrompt}
-          onChange={(e) => setSystemPrompt(e.target.value)}
+          onChange={handlePromptChange}
         />
       </div>
     </div>
