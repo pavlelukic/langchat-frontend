@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function SettingsPanel({
   currentModel,
-  setCurrentModel,
+  onModelChange,
   systemPrompt,
   setSystemPrompt,
 }) {
@@ -62,7 +62,7 @@ function SettingsPanel({
         <select
           id="model"
           value={currentModel}
-          onChange={(e) => setCurrentModel(e.target.value)}
+          onChange={(e) => onModelChange(e.target.value)}
         >
           <option value="gpt-5">GPT-5</option>
           <option value="gpt-4.1">GPT-4.1</option>

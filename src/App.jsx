@@ -46,6 +46,19 @@ function App() {
     }
   };
 
+  const handleModelChange = async (newModel) => {
+    try {
+      await axios.post("http://localhost:8080/api/chat/clear", {
+        model: newModel,
+      });
+    } catch (error) {
+      console.error("Failed to clear memory on the backend: ", error);
+    }
+
+    setCurrentModel(newModel);
+    setMessages([]);
+  };
+
   return (
     <div className="app-container">
       <SettingsPanel
@@ -53,6 +66,7 @@ function App() {
         setCurrentModel={setCurrentModel}
         systemPrompt={systemPrompt}
         setSystemPrompt={setSystemPrompt}
+        onModelChange={handleModelChange}
       />
       <div className="chat-container">
         <ChatWindow messages={messages} isLoading={isLoading} />
