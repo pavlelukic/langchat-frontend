@@ -1,9 +1,11 @@
+import ReactMarkdown from "react-markdown";
+
 function ChatWindow({ messages, isLoading }) {
   return (
     <div className="chat-window">
       {messages.map((msg, index) => (
         <div key={index} className={`message ${msg.sender}`}>
-          <p>{msg.text}</p>
+          <ReactMarkdown>{msg.text}</ReactMarkdown>
         </div>
       ))}
       {isLoading && (

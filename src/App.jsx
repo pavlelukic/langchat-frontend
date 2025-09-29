@@ -19,12 +19,17 @@ function App() {
     setMessages(newMessages);
     setIsLoading(true);
 
+    const markdownInstruction =
+      "\n\nFormat your answers using Markdown, including headings, lists, and bold text when appropriate.";
+
+    const fullPrompt = `${systemPrompt}${markdownInstruction}`;
+
     try {
       //2. Saljemo zahtev nasem Spring Boot backendu
       const response = await axios.post("http://localhost:8080/api/chat", {
         message: userMessage,
         model: currentModel,
-        systemPrompt: systemPrompt,
+        systemPrompt: fullPrompt,
       });
 
       //3. Dodajemo AI odgovor u chat prozor

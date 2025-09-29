@@ -195,3 +195,59 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
+.message h1,
+.message h2,
+.message h3,
+.message h4 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  color: var(--text-light);
+}
+
+.message ul,
+.message ol {
+  padding-left: 24px;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.message li {
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
+
+.message strong {
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.message code {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+}
+
+.message a {
+  color: var(--primary-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.message a:hover {
+  text-decoration: underline;
+}
+
+.message code {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.message pre {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
